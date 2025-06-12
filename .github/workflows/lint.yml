@@ -1,0 +1,56 @@
+# ci-templates/.github/workflows/lint.yml
+name: Lint Workflow
+
+on:
+  workflow_call:
+    inputs:
+      run_eslint:
+        required: false
+        type: boolean
+        default: false
+      run_pylint:
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  pylint:
+    if: ${{ inputs.run_pylint }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pylint
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+
+      - name: Run pylint
+        run: |
+          pylint --rcfile=.pylintrc $(git ls-files '*.py')
+
+  eslint:
+    if: ${{ inputs.run_eslint }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx
