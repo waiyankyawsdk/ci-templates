@@ -1,0 +1,11 @@
+{
+  "name": "pos_payment_dinger",
+  "version": "1.0.0",
+  "description": "POS Payment Dinger JS Linting",
+  "scripts": {
+    "lint": "eslint . --ext .js,.jsx"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
