@@ -1,7 +1,7 @@
 {
-  "name": "pos_payment_dinger",
+  "name": "ES Lint Check",
   "version": "1.0.0",
-  "description": "POS Payment Dinger JS Linting",
+  "description": "ES Linting",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx"
   },

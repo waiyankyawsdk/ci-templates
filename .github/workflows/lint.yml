@@ -47,6 +47,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check for package.json
+        id: check_package
+        run: |
+          if [ -f package.json ]; then echo "exists=true" >> $GITHUB_OUTPUT; else echo "exists=false" >> $GITHUB_OUTPUT; fi
+
+      - name: Download shared package.json if not present
+        run: |
+          if [ ! -f package.json ]; then wget https://raw.githubusercontent.com/waiyankyawsdk/ci-templates/main/package.json; fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
