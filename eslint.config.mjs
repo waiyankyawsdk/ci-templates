@@ -14,6 +14,7 @@ export default defineConfig([
                 ...globals.browser,
             }
         },
+        ignores: ["**/qrcode.js"],
         rules: {
             // ✅ Turn off camelCase check
             camelcase: "off",
