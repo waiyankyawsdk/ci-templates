@@ -30,9 +30,9 @@ export default defineConfig([
         files: ["**/*.scss"],
         plugins: { scss: scssPlugin },
         languageOptions: {
-            globals: {globals.browser,},
+            globals: { ...globals.browser },
             parserOptions: {
-            // SCSS parser if needed, usually stylelint does this
+                // SCSS parser if needed, usually stylelint does this
             }
         },
         rules: {
@@ -41,6 +41,9 @@ export default defineConfig([
             "scss/selector-no-redundant-nesting-selector": "error",
             // add more scss rules here as needed
         },
+    },
+    { 
+        files: ["**/*.{js,mjs,cjs}"], 
+        languageOptions: { globals: globals.browser } 
     }
-    { files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.browser } },
 ]);
