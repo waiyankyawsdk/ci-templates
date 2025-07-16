@@ -37,7 +37,13 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint --rcfile=.pylintrc $(git ls-files '*.py')
+          FILES=$(git ls-files '*.py')
+          if [ -z "$FILES" ]; then
+            echo "No Python files to lint. Skipping pylint."
+            exit 0
+          else
+            pylint --rcfile=.pylintrc $FILES
+          fi
 
   eslint:
     if: ${{ inputs.run_eslint }}
